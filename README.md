@@ -1,9 +1,19 @@
 # Hase-iQ
-Example communication to a Hase iQ Stove
+Example communication to a Hase iQ Stove. https://www.hase.de/iq-technologie
 
+## Sample Program
+Python program that connects to the oven and request all known commands in different intervals. Displays all kown values to the console.
+Example Output
+
+
+> 2024-10-07 00:29:03.033109 {'appPhase': '4', 'appT': '36.2', 'appAufheiz': '0.0', 'appP': '69', 'appNach': '0', 'appErr': '0', 'appPTx': '60', 'appP30Tx': '30', 'appPT[0;59]': '96;98;100;100;100;100;100;100;100;100;100;100;100;100;100;100;100;96;85;72;57;50;53;65;64;63;63;63;63;63;64;64;64;64;64;65;65;65;65;66;66;66;66;66;66;67;67;67;67;67;68;68;68;68;68;68;69;69;69;69', 'appP30T[0;29]': '56;50;63;61;60;58;58;55;73;67;64;64;61;75;61;63;54;62;60;60;58;76;56;54;68;65;63;44;71;76', '_oemdev': '6', '_oemver': 'AAF_6177=13', '_wversion': '1.4', '_oemser': '7057373', 'appIQDarst': '3', '_ledBri': '100'}
+
+## Communication
 Communication is unencrypted websocket text. Text payload is ascii encoded base64.
 
-Known Commands:
+Client sends a request for a command by sending "_req={cmd_name}". Server (the stove) sends back "{cmd_name}={value}". Example: Send "_req=appT" and you receive "appT=511.3".  See example down below for more details.
+
+## Known Commands
 
 commandsCurrentState
 
@@ -33,9 +43,17 @@ commandsInfo
             "_ledBri",          #led brightness
              
 
-Example
+### Example
+Want to request current Phase by using command `appPhase`
 
-    Websocket text payload raw: "X3JlcT1hcHBQaGFzZQ==\r"
-    Decoded to base64: "_req=appPhase"
-    Answer from stove payload text: "YXBwUGhhc2U9NA==\r"
-    Decoded to base64: "appPhase=4"
+Request should look like this: "_req=appPhase"
+
+Encode this string in base64 ascii: "X3JlcT1hcHBQaGFzZQ=="
+
+Add a ascii carriage return at the end: "X3JlcT1hcHBQaGFzZQ==\r"
+
+Websocket raw text payload to send: "X3JlcT1hcHBQaGFzZQ==\r"
+    
+Answer from stove as payload text: "YXBwUGhhc2U9NA==\r"
+
+Decoded from base64 ascii: "appPhase=4"
