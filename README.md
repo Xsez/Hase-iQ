@@ -2,7 +2,7 @@
 Example communication to a Hase iQ Stove. https://www.hase.de/iq-technologie
 
 ## Sample Program
-Python program that connects to the oven and request all known commands in different intervals. Displays all kown values to the console.
+Python program ofen.py connects to the oven and request all known commands in different intervals. Displays all kown values to the console.
 Example Output
 
 
