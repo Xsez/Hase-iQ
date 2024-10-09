@@ -1,4 +1,4 @@
-# example of an asyncio websocket client with websockets
+#communication class for Hase iQ stoves
 import asyncio
 import base64
 import datetime
@@ -43,7 +43,7 @@ class IQstove:
         self.ip = ip
         self.model = self.getValue("_oemdev")
         self.serial = self.getValue("_oemser")
-        self.controllerVersion = self.getValue("_oemser")
+        self.controllerVersion = self.getValue("_oemver")
         self.wifiVersion = self.getValue("_wversion")
 
     def createB64CommandString(self, command):
